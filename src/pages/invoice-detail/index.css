@@ -1,11 +1,15 @@
 .invoices-detail__container {
   position: relative;
-  background-color: white;
+  background-color: #f0f2f5;
   width: 100%;
   text-align: justify;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.invoices-detail__container .ant-card-body {
+  width: 100%;
 }
 
 .invoices-detail__content {
@@ -19,6 +23,8 @@
   flex-direction: column;
   width: 100%;
   max-width: 1400px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin: 3em 1em;
 }
 
 .info__content {
@@ -38,4 +44,30 @@
   margin-top: 2em;
   width: 100%;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 20px;
+}
+
+.invoid-id__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.invoid-id__container p {
+  color: #1d252d;
+}
+
+.copy-button:hover,
+.copy-button:focus,
+.copy-button:focus-visible {
+  outline: none !important;
+  border: none !important ;
+  background: transparent !important;
+}
+
+.copy-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }

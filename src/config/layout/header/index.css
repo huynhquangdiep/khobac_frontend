@@ -4,6 +4,7 @@ body {
   margin: 0;
   height: 120%;
   font-family: "Josefin Sans", sans-serif;
+  background-color: #f0f2f5;
 }
 
 a {
@@ -23,6 +24,7 @@ a {
   max-height: 200px;
   min-width: 300px;
   color: #eee;
+  z-index: 100;
 }
 
 .header__container:after {

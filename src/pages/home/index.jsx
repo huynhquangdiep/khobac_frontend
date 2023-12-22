@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Table } from "antd";
 import { useSelector } from "react-redux";
+import { isEmpty } from "lodash-es";
 
 import Header from "@/config/layout/header";
 import SearchBar from "@/components/SearchBar";
@@ -8,9 +9,9 @@ import {
   invoiceSelector,
   invoiceLoadingSelector
 } from "@/store/invoice/invoice.selector";
+import { Empty } from "antd";
 
 import "./index.css";
-import { isEmpty } from "lodash-es";
 
 const Home = () => {
   const dataSource = useSelector(invoiceSelector);
@@ -55,6 +56,21 @@ const Home = () => {
     }
   ];
 
+  let locale = {
+    emptyText: (
+      <div className="empty__container">
+        <p>Không có dữ liêu</p>
+        <Empty
+          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          imageStyle={{
+            height: 80
+          }}
+          description={false}
+        ></Empty>
+      </div>
+    )
+  };
+
   return (
     <>
       <Header />
@@ -62,6 +78,7 @@ const Home = () => {
         <div className="home__content">
           <SearchBar />
           <Table
+            locale={locale}
             className="invoice-table"
             dataSource={dataSource}
             columns={columns}
