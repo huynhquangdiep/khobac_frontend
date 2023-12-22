@@ -1,0 +1,27 @@
+.home__container {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  text-align: justify;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home__content {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.invoice-table {
+  width: 100%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

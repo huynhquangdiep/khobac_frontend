@@ -1,0 +1,12 @@
+.search__container {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.search-button {
+  border-radius: 30px;
+  font-size: 16px;
+  padding: 1em 2em;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 20px;
+}

@@ -1,0 +1,41 @@
+.invoices-detail__container {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  text-align: justify;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invoices-detail__content {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.info__content {
+  display: flex;
+  gap: 0.5em;
+}
+.info__content .label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.info__content p {
+  font-size: 14px;
+}
+
+.invoice-detail-table {
+  margin-top: 2em;
+  width: 100%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
