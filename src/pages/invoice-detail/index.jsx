@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { get, isEmpty } from "lodash-es";
 import toast from "react-hot-toast";
+import moment from "moment";
 
-import Header from "@/config/layout/header";
 import { useAppDispatch } from "@/store";
+import Header from "@/config/layout/header";
+import { invoiceDetailColumn } from "./column";
 import { getInvoiceDetail } from "@/store/invoice/invoice.thunk";
 import { invoiceDetailSelector } from "@/store/invoice/invoice.selector";
-import CopyIcon from "~/public/icons/copy.svg";
 
 import "./index.css";
 
@@ -26,55 +27,6 @@ const InvoicesDetail = () => {
       icon: "👏"
     });
   };
-
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "invoice_id",
-      key: "invoice_id",
-      render: (text) => (
-        <div className="invoid-id__container">
-          <p>{text}</p>
-          <img
-            className="copy-icon"
-            src={CopyIcon}
-            onClick={() => handleCopy(text)}
-          />
-        </div>
-      )
-    },
-    {
-      title: "Số Hóa Đơn",
-      dataIndex: "bill_code",
-      key: "bill_code"
-    },
-    {
-      title: "Ngày",
-      dataIndex: "bill_date",
-      key: "bill_date"
-    },
-    {
-      title: "Nội dung",
-      dataIndex: "content",
-      key: "content"
-    },
-    {
-      title: "Số Tiền",
-      dataIndex: "money",
-      key: "money",
-      render: (text) => {
-        const currency = text.toString();
-
-        return (
-          <p style={{ fontWeight: "bold" }}>
-            {isEmpty(currency)
-              ? "-"
-              : currency.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-          </p>
-        );
-      }
-    }
-  ];
 
   useEffect(() => {
     dispatch(getInvoiceDetail(decodedInvoiceId));
@@ -96,6 +48,14 @@ const InvoicesDetail = () => {
             </p>
           </div>
           <div className="info__content">
+            <p className="label">Mã số phụ:</p>
+            <p className="text">{get(detail, "sub_invoice_id", "-")}</p>
+          </div>
+          <div className="info__content">
+            <p className="label">Hóa đơn code:</p>
+            <p className="text">{get(detail, "code_invoice", "-")}</p>
+          </div>
+          <div className="info__content">
             <p className="label">Đơn vị:</p>
             <p className="text">{get(detail, "organization", "-")}</p>
           </div>
@@ -115,10 +75,30 @@ const InvoicesDetail = () => {
             <p className="label">Địa chỉ:</p>
             <p className="text">{get(detail, "location", "-")}</p>
           </div>
+          <div className="info__content">
+            <p className="label">Ngày kí 1:</p>
+            <p className="text">{get(detail, "signature_date_1", "-")}</p>
+          </div>
+          <div className="info__content">
+            <p className="label">Ngày kí 2:</p>
+            <p className="text">{get(detail, "signature_date_2", "-")}</p>
+          </div>
+          <div className="info__content">
+            <p className="label">Ngày tạo:</p>
+            <p className="text">
+              {isEmpty(get(detail, "time_created", ""))
+                ? "-"
+                : moment(get(detail, "time_created", "")).format("DD/MM/YYYY")}
+            </p>
+          </div>
+          <div className="info__content">
+            <p className="label">Ngày cập nhật:</p>
+            <p className="text">{get(detail, "time_updated", "-")}</p>
+          </div>
           <Table
             className="invoice-detail-table"
-            dataSource={get(detail, "contents", [])}
-            columns={columns}
+            dataSource={get(detail, "details", [])}
+            columns={invoiceDetailColumn(handleCopy)}
           />
         </Card>
       </div>

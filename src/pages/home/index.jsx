@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { Table } from "antd";
+import { Form, Switch, Table } from "antd";
+import { Empty } from "antd";
 import { useSelector } from "react-redux";
-import { isEmpty } from "lodash-es";
+import { useState } from "react";
 
 import Header from "@/config/layout/header";
 import SearchBar from "@/components/SearchBar";
@@ -9,79 +9,51 @@ import {
   invoiceSelector,
   invoiceLoadingSelector
 } from "@/store/invoice/invoice.selector";
-import { Empty } from "antd";
 
 import "./index.css";
+import { invoicesColumns } from "./column";
+import InvoicesFilter from "./InvoicesFilter";
+
+const locale = {
+  emptyText: (
+    <div className="empty__container">
+      <p>Không có dữ liêu</p>
+      <Empty
+        image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+        imageStyle={{
+          height: 80
+        }}
+        description={false}
+      ></Empty>
+    </div>
+  )
+};
 
 const Home = () => {
   const dataSource = useSelector(invoiceSelector);
   const invoiceLoading = useSelector(invoiceLoadingSelector);
 
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "invoice_id",
-      key: "invoice_id",
-      render: (text) => (
-        <Link to={`/invoices/${encodeURIComponent(text.replace(/ /g, "+"))}`}>
-          {text}
-        </Link>
-      )
-    },
-    {
-      title: "Nội Dung",
-      dataIndex: "content",
-      key: "content"
-    },
-    {
-      title: "Đơn vị",
-      dataIndex: "organization",
-      key: "organization"
-    },
-    {
-      title: "Số Tiền",
-      dataIndex: "money",
-      key: "money",
-      render: (text) => {
-        const currency = text.toString();
-
-        return (
-          <p style={{ fontWeight: "bold" }}>
-            {isEmpty(currency)
-              ? "-"
-              : currency.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-          </p>
-        );
-      }
-    }
-  ];
-
-  let locale = {
-    emptyText: (
-      <div className="empty__container">
-        <p>Không có dữ liêu</p>
-        <Empty
-          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-          imageStyle={{
-            height: 80
-          }}
-          description={false}
-        ></Empty>
-      </div>
-    )
-  };
+  const [isFullSearch, setFullSearch] = useState(true);
 
   return (
     <>
       <Header />
       <div className="home__container">
         <div className="home__content">
-          <SearchBar />
+          <div className="title__content">
+            <p className="title">Tìm Kiếm</p>
+            <Form.Item label="Thay đổi bộ lọc" valuePropName="checked">
+              <Switch onChange={() => setFullSearch(!isFullSearch)} />
+            </Form.Item>
+          </div>
+
+          {isFullSearch ? <SearchBar /> : <InvoicesFilter />}
+
           <Table
             locale={locale}
             className="invoice-table"
             dataSource={dataSource}
-            columns={columns}
+            columns={invoicesColumns}
             loading={invoiceLoading}
           />
         </div>

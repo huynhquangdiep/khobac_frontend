@@ -4,7 +4,8 @@
   text-align: justify;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
 .home__content {
@@ -22,6 +23,7 @@
 }
 
 .invoice-table {
+  margin-top: 2em;
   width: 100%;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 20px;
@@ -31,4 +33,18 @@
 .empty__container {
   display: flex;
   flex-direction: column;
+}
+
+.home__content .title__content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1em;
+}
+
+.home__content .title__content .title {
+  font-size: 22px;
+  font-weight: bold;
+  color: black;
+  line-height: 0;
 }

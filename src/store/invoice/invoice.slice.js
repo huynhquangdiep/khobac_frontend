@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getInvoice, getInvoiceDetail } from "./invoice.thunk";
+import {
+  getInvoice,
+  getInvoiceDetail,
+  getInvoiceWithFilter
+} from "./invoice.thunk";
 
 export const NAMESPACE = "invoice";
 
@@ -38,6 +42,17 @@ export const invoiceSlice = createSlice({
       .addCase(getInvoiceDetail.rejected, (state) => {
         state.detail.loading = false;
         state.detail.data = initialState.detail.data;
+      })
+      .addCase(getInvoiceWithFilter.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getInvoiceWithFilter.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload || initialState.data;
+      })
+      .addCase(getInvoiceWithFilter.rejected, (state) => {
+        state.loading = false;
+        state.data = initialState.data;
       });
   }
 });
