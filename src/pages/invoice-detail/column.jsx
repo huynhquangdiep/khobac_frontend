@@ -1,25 +1,9 @@
 import { isEmpty } from "lodash-es";
 
-import CopyIcon from "~/public/icons/copy.svg";
 import { checkEmptyColumn } from "@/common/utils/string";
 
-export const invoiceDetailColumn = (handleCopy) => {
+export const invoiceDetailColumn = () => {
   return [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      render: (text) => (
-        <div className="invoid-id__container">
-          <p>{text}</p>
-          <img
-            className="copy-icon"
-            src={CopyIcon}
-            onClick={() => handleCopy(text)}
-          />
-        </div>
-      )
-    },
     {
       title: "Mã NDKT",
       dataIndex: "NDKT_code",

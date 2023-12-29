@@ -14,5 +14,5 @@ export const invoiceLoadingSelector = createSelector(selfSelector, (invoice) =>
 );
 
 export const invoiceDetailSelector = createSelector(selfSelector, (invoice) =>
-  get(invoice, "detail.data[0]", {})
+  get(invoice, "detail.data", {})
 );

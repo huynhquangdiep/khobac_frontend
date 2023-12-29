@@ -23,20 +23,13 @@ export const getInvoiceWithFilter = createAsyncThunk(
   "invoice/getInvoiceWithFilter",
   async (filters, { rejectWithValue }) => {
     try {
-      const {
-        invoice_id,
-        organization,
-        content,
-        money,
-        organization_received
-      } = filters;
+      const { invoice_id, organization, content, money } = filters;
 
       const queryParams = new URLSearchParams({
         invoice_id,
         organization,
         content,
-        money,
-        organization_received
+        money
       });
 
       const response = await service.get(
@@ -59,7 +52,7 @@ export const getInvoiceDetail = createAsyncThunk(
       const response = await service.get(
         `${import.meta.env.VITE_PUBLIC_BASE_API_URL}/${
           API_ENDPOINTS.GET_INVOICE_DETAIL
-        }?invoice_id=${filters}`
+        }?sub_invoice_id=${filters}`
       );
 
       return response;

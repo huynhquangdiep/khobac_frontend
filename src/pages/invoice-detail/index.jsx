@@ -2,9 +2,8 @@ import { Card, Table } from "antd";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { get, isEmpty } from "lodash-es";
+import { get } from "lodash-es";
 import toast from "react-hot-toast";
-import moment from "moment";
 
 import { useAppDispatch } from "@/store";
 import Header from "@/config/layout/header";
@@ -16,10 +15,8 @@ import "./index.css";
 
 const InvoicesDetail = () => {
   const dispatch = useAppDispatch();
-  const { invoice_id } = useParams();
+  const { sub_invoice_id } = useParams();
   const detail = useSelector(invoiceDetailSelector);
-
-  const decodedInvoiceId = decodeURIComponent(invoice_id.replace(/\+/g, " "));
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
@@ -29,8 +26,8 @@ const InvoicesDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(getInvoiceDetail(decodedInvoiceId));
-  }, [decodedInvoiceId]);
+    dispatch(getInvoiceDetail(sub_invoice_id));
+  }, [sub_invoice_id]);
 
   return (
     <>
@@ -82,18 +79,6 @@ const InvoicesDetail = () => {
           <div className="info__content">
             <p className="label">Ngày kí 2:</p>
             <p className="text">{get(detail, "signature_date_2", "-")}</p>
-          </div>
-          <div className="info__content">
-            <p className="label">Ngày tạo:</p>
-            <p className="text">
-              {isEmpty(get(detail, "time_created", ""))
-                ? "-"
-                : moment(get(detail, "time_created", "")).format("DD/MM/YYYY")}
-            </p>
-          </div>
-          <div className="info__content">
-            <p className="label">Ngày cập nhật:</p>
-            <p className="text">{get(detail, "time_updated", "-")}</p>
           </div>
           <Table
             className="invoice-detail-table"

@@ -16,7 +16,7 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding: 40px;
+  padding: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,10 +27,15 @@
   margin: 3em 1em;
 }
 
+.invoice-detail-table td.ant-table-cell {
+  padding: 0.25em 1em !important;
+}
+
 .info__content {
   display: flex;
   gap: 0.5em;
 }
+
 .info__content .label {
   font-weight: bold;
   font-size: 14px;
@@ -38,6 +43,7 @@
 
 .info__content p {
   font-size: 14px;
+  line-height: 8px;
 }
 
 .invoice-detail-table {

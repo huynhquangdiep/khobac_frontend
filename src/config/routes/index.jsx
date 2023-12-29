@@ -7,7 +7,7 @@ const routes = [
     component: <Home />
   },
   {
-    path: "invoices/:invoice_id",
+    path: "invoices/:sub_invoice_id",
     component: <InvoicesDetail />
   }
 ];

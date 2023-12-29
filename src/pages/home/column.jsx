@@ -7,10 +7,8 @@ export const invoicesColumns = [
     title: "ID",
     dataIndex: "invoice_id",
     key: "invoice_id",
-    render: (text) => (
-      <Link to={`/invoices/${encodeURIComponent(text.replace(/ /g, "+"))}`}>
-        {text}
-      </Link>
+    render: (text, _) => (
+      <Link to={`/invoices/${_.sub_invoice_id}`}>{text}</Link>
     )
   },
   {

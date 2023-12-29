@@ -12,7 +12,10 @@ const service = axios.create({
   baseURL: config.baseApiUrl,
   timeout: 30 * 1000,
   paramsSerializer: (params) =>
-    qs.stringify(params, { arrayFormat: "brackets" }),
+    qs.stringify(params, {
+      arrayFormat: "brackets",
+      encode: true
+    }),
   withCredentials: true
 });
 
