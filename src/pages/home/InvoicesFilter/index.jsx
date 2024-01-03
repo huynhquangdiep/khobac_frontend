@@ -1,15 +1,37 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, Form, Input, InputNumber, Row } from "antd";
+import moment from "moment";
+
 import { useAppDispatch } from "@/store";
 
 import { getInvoiceWithFilter } from "../../../store/invoice/invoice.thunk";
+import KBDatePicker from "@/components/KBDatePicker";
 
 import "./index.css";
+import { first, last } from "lodash-es";
+
+const { RangePicker } = KBDatePicker;
 
 const InvoicesFilter = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values) => {
-    dispatch(getInvoiceWithFilter(values));
+    const { signature_date_1 } = values;
+
+    let params = { ...values };
+
+    if (signature_date_1) {
+      const signatureDate1Start = first(signature_date_1);
+      const signatureDate1Stop = last(signature_date_1);
+
+      params = {
+        ...params,
+        signature_date_1_start:
+          moment(signatureDate1Start).format("DD/MM/YYYY"),
+        signature_date_1_stop: moment(signatureDate1Stop).format("DD/MM/YYYY")
+      };
+    }
+
+    dispatch(getInvoiceWithFilter(params));
   };
 
   return (
@@ -20,7 +42,11 @@ const InvoicesFilter = () => {
         invoice_id: "",
         organization: "",
         content: "",
-        money: ""
+        money: "",
+        NDKT_code_start: "",
+        NDKT_code_stop: "",
+        signature_date_1_start: "",
+        signature_date_1_Stop: ""
       }}
       onFinish={handleSubmit}
     >
@@ -48,6 +74,35 @@ const InvoicesFilter = () => {
           <Form.Item label="Tiền" name="money">
             <Input placeholder="1000000" allowClear className="input" />
           </Form.Item>
+        </Col>
+        <Col xs={24} md={12} xl={12} xxl={5}>
+          <Form.Item label="Ngày Kí" name="signature_date_1">
+            <RangePicker />
+          </Form.Item>
+        </Col>
+        <Col xs={24} md={12} xl={12} xxl={5}>
+          <Row>
+            <Col xs={12}>
+              <Form.Item label="NDKT Code Từ" name="NDKT_code_start">
+                <InputNumber
+                  defaultValue={0}
+                  min={0}
+                  style={{ width: "100%" }}
+                  allowClear
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={12}>
+              <Form.Item label="NDKT Code Đến" name="NDKT_code_stop">
+                <InputNumber
+                  defaultValue={0}
+                  min={0}
+                  style={{ width: "100%" }}
+                  allowClear
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </Col>
         <Col xs={24} md={12} xl={12} xxl={4}>
           <Form.Item label=" ">

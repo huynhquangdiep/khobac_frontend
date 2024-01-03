@@ -23,13 +23,32 @@ export const getInvoiceWithFilter = createAsyncThunk(
   "invoice/getInvoiceWithFilter",
   async (filters, { rejectWithValue }) => {
     try {
-      const { invoice_id, organization, content, money } = filters;
+      const {
+        invoice_id,
+        organization,
+        content,
+        money,
+        NDKT_code_start = 0,
+        NDKT_code_stop = 0,
+        signature_date_1_start = "",
+        signature_date_1_stop = ""
+      } = filters;
+      signature_date_1_start && signature_date_1_start === 0
+        ? signature_date_1_start
+        : "";
+      signature_date_1_start && signature_date_1_stop === 0
+        ? signature_date_1_start
+        : "";
 
       const queryParams = new URLSearchParams({
         invoice_id,
         organization,
         content,
-        money
+        money,
+        NDKT_code_start,
+        NDKT_code_stop,
+        signature_date_1_start,
+        signature_date_1_stop
       });
 
       const response = await service.get(

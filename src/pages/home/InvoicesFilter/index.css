@@ -19,6 +19,10 @@
   padding: 0 0.25em;
 }
 
-.input {
+.invoice__container .input {
+  width: 100%;
+}
+
+.invoice__container .ant-picker.ant-picker-range {
   width: 100%;
 }
