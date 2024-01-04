@@ -69,11 +69,11 @@ const InvoicesDetail = () => {
             <p className="text">{get(detail, "location", "-")}</p>
           </div>
           <div className="info__content">
-            <p className="label">Ngày kí 1:</p>
+            <p className="label">Thủ trưởng ký:</p>
             <p className="text">{get(detail, "signature_date_1", "-")}</p>
           </div>
           <div className="info__content">
-            <p className="label">Ngày kí 2:</p>
+            <p className="label">Giám đốc ký:</p>
             <p className="text">{get(detail, "signature_date_2", "-")}</p>
           </div>
           <Table
