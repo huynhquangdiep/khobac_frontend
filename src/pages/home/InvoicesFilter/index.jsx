@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, Form, Input, InputNumber, Row } from "antd";
 import moment from "moment";
 
 import { useAppDispatch } from "@/store";
@@ -15,20 +15,9 @@ const InvoicesFilter = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values) => {
-    const { NDKT_code, signature_date_1 } = values;
+    const { signature_date_1 } = values;
 
     let params = { ...values };
-
-    if (NDKT_code) {
-      const NDKTCodeStart = first(NDKT_code);
-      const NDKTCodeStop = last(NDKT_code);
-
-      params = {
-        ...params,
-        NDKT_code_start: moment(NDKTCodeStart).format("DD/MM/YYYY"),
-        NDKT_code_stop: moment(NDKTCodeStop).format("DD/MM/YYYY"),
-      };
-    }
 
     if (signature_date_1) {
       const signatureDate1Start = first(signature_date_1);
@@ -38,7 +27,7 @@ const InvoicesFilter = () => {
         ...params,
         signature_date_1_start:
           moment(signatureDate1Start).format("DD/MM/YYYY"),
-        signature_date_1_stop: moment(signatureDate1Stop).format("DD/MM/YYYY"),
+        signature_date_1_stop: moment(signatureDate1Stop).format("DD/MM/YYYY")
       };
     }
 
@@ -57,7 +46,7 @@ const InvoicesFilter = () => {
         NDKT_code_start: "",
         NDKT_code_stop: "",
         signature_date_1_start: "",
-        signature_date_1_Stop: "",
+        signature_date_1_Stop: ""
       }}
       onFinish={handleSubmit}
     >
@@ -87,14 +76,33 @@ const InvoicesFilter = () => {
           </Form.Item>
         </Col>
         <Col xs={24} md={12} xl={12} xxl={5}>
-          <Form.Item label='Ngày NDKT Code' name='NDKT_code'>
+          <Form.Item label='Ngày Kí' name='signature_date_1'>
             <RangePicker />
           </Form.Item>
         </Col>
         <Col xs={24} md={12} xl={12} xxl={5}>
-          <Form.Item label='Ngày Kí' name='signature_date_1'>
-            <RangePicker />
-          </Form.Item>
+          <Row>
+            <Col xs={12}>
+              <Form.Item label="Mã NDKT" name="NDKT_code_start">
+                <InputNumber
+                  defaultValue={0}
+                  min={0}
+                  style={{ width: "100%" }}
+                  allowClear
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={12}>
+              <Form.Item label="Mã NDKT" name="NDKT_code_stop">
+                <InputNumber
+                  defaultValue={0}
+                  min={0}
+                  style={{ width: "100%" }}
+                  allowClear
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </Col>
         <Col xs={24} md={12} xl={12} xxl={4}>
           <Form.Item label=' '>

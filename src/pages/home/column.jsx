@@ -53,6 +53,18 @@ export const invoicesColumns = [
     render: (text) => checkEmptyColumn(text),
   },
   {
+    title: "Thủ trưởng ký",
+    dataIndex: "signature_date_1",
+    key: "signature_date_1",
+    render: (text) => checkEmptyColumn(text),
+  },
+  {
+    title: "Giám đốc ký",
+    dataIndex: "signature_date_2",
+    key: "signature_date_2",
+    render: (text) => checkEmptyColumn(text),
+  },
+  {
     title: "Số Tiền",
     dataIndex: "money",
     key: "money",
