@@ -38,6 +38,13 @@ const InvoicesDetail = () => {
             <p className="label">Số:</p>
             <p className="text">{get(detail, "code_invoice", "-")}</p>
           </div>
+          {get(detail, "code_invoice", "") === "07" &&
+            <div className="info__content">
+              <p className="label">Giấy tạm ứng (07):</p>
+              <p className="text">{get(detail, "temp_payment_07", "-")}</p>
+            </div>
+          }
+
           <div className="info__content">
             <p className="label">Mã số:</p>
             <p
