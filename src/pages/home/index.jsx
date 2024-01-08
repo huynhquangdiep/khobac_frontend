@@ -2,7 +2,6 @@ import { Form, Switch, Table } from "antd";
 import { Empty } from "antd";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
 import Header from "@/config/layout/header";
 import SearchBar from "@/components/SearchBar";
 import {
@@ -33,7 +32,7 @@ const Home = () => {
   const dataSource = useSelector(invoiceSelector);
   const invoiceLoading = useSelector(invoiceLoadingSelector);
 
-  const [isFullSearch, setFullSearch] = useState(true);
+  // const [isFullSearch, setFullSearch] = useState(true);
 
   return (
     <>
@@ -41,13 +40,15 @@ const Home = () => {
       <div className="home__container">
         <div className="home__content">
           <div className="title__content">
-            <p className="title">Tìm Kiếm</p>
-            <Form.Item label="Thay đổi bộ lọc" valuePropName="checked">
+            {/* <Form.Item label="Thay đổi bộ lọc" valuePropName="checked">
               <Switch onChange={() => setFullSearch(!isFullSearch)} />
-            </Form.Item>
+            </Form.Item> */}
           </div>
 
-          {isFullSearch ? <SearchBar /> : <InvoicesFilter />}
+          {/* {isFullSearch ? <SearchBar /> : <InvoicesFilter />} */}
+
+          <InvoicesFilter />
+          
 
           <Table
             locale={locale}

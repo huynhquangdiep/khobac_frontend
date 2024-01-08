@@ -35,6 +35,10 @@ const InvoicesDetail = () => {
       <div className="invoices-detail__container">
         <Card className="invoices-detail__content">
           <div className="info__content">
+            <p className="label">Số:</p>
+            <p className="text">{get(detail, "code_invoice", "-")}</p>
+          </div>
+          <div className="info__content">
             <p className="label">Mã số:</p>
             <p
               className="text"
@@ -47,10 +51,6 @@ const InvoicesDetail = () => {
           <div className="info__content">
             <p className="label">Mã số phụ:</p>
             <p className="text">{get(detail, "sub_invoice_id", "-")}</p>
-          </div>
-          <div className="info__content">
-            <p className="label">Số:</p>
-            <p className="text">{get(detail, "code_invoice", "-")}</p>
           </div>
           <div className="info__content">
             <p className="label">Đơn vị:</p>
