@@ -83,6 +83,14 @@ const InvoicesDetail = () => {
             <p className="label">Giám đốc ký:</p>
             <p className="text">{get(detail, "signature_date_2", "-")}</p>
           </div>
+          <div className="info__content">
+            <p className="label">Thủ trưởng:</p>
+            <p className="text">{get(detail, "chief", "-")}</p>
+          </div>
+          <div className="info__content">
+            <p className="label">Kế toán trưởng:</p>
+            <p className="text">{get(detail, "chief_accountant", "-")}</p>
+          </div>
           <Table
             className="invoice-detail-table"
             dataSource={get(detail, "details", [])}
