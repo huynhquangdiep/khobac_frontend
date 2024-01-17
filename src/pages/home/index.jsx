@@ -56,6 +56,7 @@ const Home = () => {
             dataSource={dataSource}
             columns={invoicesColumns}
             loading={invoiceLoading}
+            pagination={{defaultPageSize: 25}}
           />
         </div>
       </div>

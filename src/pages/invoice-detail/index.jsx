@@ -95,6 +95,7 @@ const InvoicesDetail = () => {
             className="invoice-detail-table"
             dataSource={get(detail, "details", [])}
             columns={invoiceDetailColumn(handleCopy)}
+            pagination={{defaultPageSize: 25}}
           />
         </Card>
       </div>
